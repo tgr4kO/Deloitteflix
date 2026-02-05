@@ -15,19 +15,19 @@
                 <field>Rating__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Director__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Duration__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Content_status__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Publication_date__c</field>
             </layoutItems>
             <layoutItems>
@@ -55,11 +55,11 @@
                 <field>Movie_poster_image__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Cast__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Category__c</field>
             </layoutItems>
         </layoutColumns>
@@ -101,11 +101,20 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Season_ID__c</fields>
         <relatedList>Season__c.Content__c</relatedList>
+        <sortField>NAME</sortField>
+        <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Season__c</fields>
+        <fields>Episode_number__c</fields>
+        <fields>IMDBId__c</fields>
+        <fields>Duration__c</fields>
         <relatedList>Episode__c.Content__c</relatedList>
+        <sortField>Season__c</sortField>
+        <sortOrder>Asc</sortOrder>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

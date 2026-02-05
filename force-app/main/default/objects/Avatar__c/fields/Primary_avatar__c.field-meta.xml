@@ -3,6 +3,7 @@
     <fullName>Primary_avatar__c</fullName>
     <defaultValue>false</defaultValue>
     <description>Mark this checkbox to use this avatar as principal.</description>
+    <externalId>false</externalId>
     <label>Primary avatar</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>

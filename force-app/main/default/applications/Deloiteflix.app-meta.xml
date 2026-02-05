@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#468E4B</headerColor>
+        <logo>X1000036240</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
+    </brand>
+    <description>Deloitteflix is a next-generation, Netflix-style learning platform designed to transform how professionals discover, consume, and master Salesforce knowledge.
+Combining the visual engagement of a streaming service, the trust and expertise of Deloitte, and</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Deloiteflix</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>Avatar__c</tabs>
+    <tabs>Content__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Deloiteflix_UtilityBar</utilityBar>
+</CustomApplication>

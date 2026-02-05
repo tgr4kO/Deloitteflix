@@ -3,6 +3,7 @@
     <fullName>Parental_control__c</fullName>
     <defaultValue>false</defaultValue>
     <description>Mark this checkbox to block access attempt to parental content.</description>
+    <externalId>false</externalId>
     <label>Parental control</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
