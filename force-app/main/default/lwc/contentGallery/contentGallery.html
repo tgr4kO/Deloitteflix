@@ -1,0 +1,21 @@
+<template>
+    <p>RecordId: {recordId}</p>
+    <p>Total contenidos: {contentCount}</p>
+    <div class="c-container">
+        <lightning-layout multiple-rows>
+            <template for:each={content} for:item="item">
+                <lightning-layout-item
+                    key={item.Id}
+                    size="3"
+                    padding="around-small">
+
+                    <c-content-poster
+                        content={item}
+                        onselect={handleSelect}>
+                    </c-content-poster>
+
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </div>
+</template>

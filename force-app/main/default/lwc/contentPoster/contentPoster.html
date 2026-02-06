@@ -1,0 +1,22 @@
+<template>
+    <template if:true={hasContent}>
+        <div class="card" onclick={handleClick}>
+            <div class="poster">
+                <img src={content.Movie_poster_url__c}
+                     alt={content.Name}
+                     class="poster-img"/>
+
+                <div class="overlay">
+                    <h3 class="title">{content.Name}</h3>
+                    <p class="details">
+                        {content.Content_type__c} | {content.Category__c}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template if:false={hasContent}>
+        <p>No se encontró contenido</p>
+    </template>
+</template>
