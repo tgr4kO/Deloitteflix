@@ -1,10 +1,17 @@
 .c-container {
+    display: flex;
+    flex-wrap: wrap; /* permite que las cards pasen a la siguiente fila */
+    gap: 1rem;       /* separación entre cards */
+    padding: 1rem;
     border: 1px solid #d8dde6;
     margin: 10px 0 20px;
 }
 
+
 .header-column {
-    padding: 0 2rem;
+    padding: 0 1rem; /* reduce un poco para que no se desborde */
+    flex: 1; /* permite que cada columna ocupe el espacio disponible */
+    min-width: 0; /* importante para evitar overflow en flex */
 }
 
 .field-title {
@@ -12,4 +19,13 @@
     line-height: 1.25;
     color: #54698d;
     margin-bottom: 0.25rem;
+    display: block; /* asegura que no se superponga con contenido inline */
+    word-break: break-word; /* evita que el texto largo rompa el layout */
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+    color: #16325c;
 }

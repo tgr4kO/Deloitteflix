@@ -1,21 +1,42 @@
 <template>
-    <p>RecordId: {recordId}</p>
-    <p>Total contenidos: {contentCount}</p>
     <div class="c-container">
-        <lightning-layout multiple-rows>
-            <template for:each={content} for:item="item">
-                <lightning-layout-item
-                    key={item.Id}
-                    size="3"
-                    padding="around-small">
 
-                    <c-content-poster
-                        content={item}
-                        onselect={handleSelect}>
-                    </c-content-poster>
+        <!-- SERIES -->
+        <template if:true={hasSeries}>
+            <h2 class="section-title">📺 Series ({seriesCount})</h2>
+            <lightning-layout multiple-rows>
+                <template for:each={seriesContent} for:item="item">
+                    <lightning-layout-item
+                        key={item.Id}
+                        size="3"
+                        padding="around-small">
+                        <c-content-poster
+                            content={item}
+                            onselect={handleSelect}>
+                        </c-content-poster>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
 
-                </lightning-layout-item>
-            </template>
-        </lightning-layout>
+        <!-- MOVIES + DOCUMENTARIES -->
+        <template if:true={hasMoviesOrDocs}>
+            <h2 class="section-title">🎬 Movies and Documentaries ({moviesAndDocsCount})</h2>
+            <lightning-layout multiple-rows>
+                <template for:each={moviesAndDocs} for:item="item">
+                    <lightning-layout-item
+                        key={item.Id}
+                        size="3"
+                        padding="around-small">
+                        <c-content-poster
+                            content={item}
+                            onselect={handleSelect}>
+                        </c-content-poster>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+
     </div>
+
 </template>

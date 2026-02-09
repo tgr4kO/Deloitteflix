@@ -1,24 +1,25 @@
 .card {
-    width: 250px;
+    flex: 1 1 250px; /* crece y encoge según espacio, mínimo 250px */
+    max-width: 300px;
     font-family: 'Arial', sans-serif;
-    margin: 10px;
+    margin: 0; /* el gap lo maneja el contenedor */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 8px 15px rgba(0,0,0,0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    pointer-events: auto;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+    
 }
 
 .poster-container {
     position: relative;
     width: 100%;
     height: 350px;
-    pointer-events: none;
+    overflow: hidden; /* 🔑 CLAVE */
 }
 
 .poster-img {
@@ -29,15 +30,28 @@
     border-bottom: 1px solid #ccc;
 }
 
+.poster {
+    position: relative;
+    overflow: hidden;
+}
+.poster:hover .overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 10px;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
     color: white;
-    box-sizing: border-box;
+
+    /* 🔑 CLAVE */
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
 }
 
