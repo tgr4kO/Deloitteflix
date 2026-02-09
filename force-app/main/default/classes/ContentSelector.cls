@@ -37,7 +37,7 @@ public with sharing class ContentSelector {
         if(contentType == 'Total'){
             results.addall(getSeries());
             results.addall(getMovies());
-        } else if(contentType == 'Serie'){
+        } else if(contentType == 'Series'){
             results.addall(getSeries());
         } else if(contentType == 'Movies and documentaries'){
             results.addall(getMovies());
