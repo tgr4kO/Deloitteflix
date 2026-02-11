@@ -1,3 +1,43 @@
 <template>
-    
+    <lightning-card title="OMDb License Management" icon-name="utility:video">
+        <div class="slds-p-around_medium">
+
+            <template if:true={isSearchView}>
+                <c-omdb_search-bar
+                    onsearchchange={handleSearchChange}>
+                </c-omdb_search-bar>
+
+                <template if:true={isLoading}>
+                    <lightning-spinner
+                        alternative-text="Loading"
+                        size="medium">
+                    </lightning-spinner>
+                </template>
+
+                <c-omdb_table
+                    results={results}
+                    ondetail={handleRowDetail}
+                    ondownload={handleDownload}>
+                </c-omdb_table>
+            </template>
+
+            <template if:true={isDetailView}>
+                <template if:true={isLoading}>
+                    <lightning-spinner
+                        alternative-text="Loading detail"
+                        size="medium">
+                    </lightning-spinner>
+                </template>
+
+                <template if:true={selectedItem}>
+                    <c-omdb_detail
+                        item={selectedItem}
+                        onback={handleBackFromDetail}
+                        ondownload={handleDownload}>
+                    </c-omdb_detail>
+                </template>
+            </template>
+
+        </div>
+    </lightning-card>
 </template>

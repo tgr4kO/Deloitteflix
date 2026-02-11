@@ -2,23 +2,24 @@ public with sharing class OMDBContent {
 
     // DTO para mapear el JSON de OMDb
     public class OMDbResponse {
-        public String title;   				// Name in Content__c
-        public String year; 					// no en Content__c
-        public String rated;   				// Rating__c in Content__c
-        public String released;  				// Publication_date__c in Content__c
-        public String season;					// Season__c.Number__c
-        public String episode;					// Episode__c.Episode_number__c
-        public String runtime;					// Duration__c in Content__c
-        public String genre;    				// Category__c in Content__c
-        public String director;    	 			// Director__c
-        public String actors;   				// Cast__c
-        public String plot;         			// Synopsis__c
-        public String awards;					// Awards__c
-        public String poster;  					// Movie_poster_url__c
-        public String imdbID;					// IMDBId__c
-        public String seriesID;    				// Season_ID__c
-        public String type;						// movie, series, episode
-        public String response;
+        @AuraEnabled public String title;                   // Name in Content__c
+        @AuraEnabled public String year;                    // no en Content__c
+        @AuraEnabled public String rated;                   // Rating__c in Content__c
+        @AuraEnabled public String released;                // Publication_date__c in Content__c
+        @AuraEnabled public String season;                  // Season__c.Number__c
+        @AuraEnabled public String episode;                 // Episode__c.Episode_number__c
+        @AuraEnabled public String runtime;                 // Duration__c in Content__c
+       @AuraEnabled public String genre;                    // Category__c in Content__c
+       @AuraEnabled public String director;                 // Director__c
+       @AuraEnabled public String actors;                   // Cast__c
+       @AuraEnabled public String plot;                     // Synopsis__c
+       @AuraEnabled public String awards;                   // Awards__c
+       @AuraEnabled public String poster;                   // Movie_poster_url__c
+       @AuraEnabled public String imdbID;                   // IMDBId__c
+       @AuraEnabled public String seriesID;                 // Season_ID__c
+       @AuraEnabled public String type;                     // movie, series, episode
+       @AuraEnabled public String response;
+       @AuraEnabled public String imdbRating;
     }
 
     /**
@@ -39,7 +40,7 @@ public with sharing class OMDBContent {
      */
     public static SObject toRecord(OMDbResponse omdb) {
         if (omdb == null || omdb.response == 'False') return null;
-
+    
         switch on omdb.type {
             when 'movie' {
                 Content__c content = new Content__c();
@@ -54,20 +55,38 @@ public with sharing class OMDBContent {
                 content.Awards__c = omdb.awards;
                 content.Movie_poster_url__c = (omdb.poster != 'N/A') ? omdb.poster : null;
                 content.IMDBId__c = omdb.imdbID;
+    
+                // 👇 IMPORTANTE: valores válidos en tu picklist
+                content.Content_type__c = 'Movie';      // valor EXACTO del picklist
+                content.Content_status__c = 'Active';   // valor EXACTO del picklist
+    
                 return content;
             }
             when 'series' {
                 Content__c content = new Content__c();
                 content.Name = omdb.title;
                 content.IMDBId__c = omdb.imdbID;
+    
+                content.Rating__c = omdb.rated;
+                content.Publication_date__c = parseOmdbDate(omdb.released);
+                content.Category__c = (omdb.genre != null) ? omdb.genre.replace(', ', ';') : null;
+                content.Director__c = omdb.director;
+                content.Cast__c = omdb.actors;
+                content.Synopsis__c = omdb.plot;
+                content.Awards__c = omdb.awards;
+                content.Movie_poster_url__c = (omdb.poster != 'N/A') ? omdb.poster : null;
+    
+                // 👇 para series: duración 0 (o lo que hayáis definido)
+                content.Duration__c = 0;
+                content.Content_type__c = 'Series';     // valor EXACTO del picklist
+                content.Content_status__c = 'Active';
+    
                 return content;
             }
             when 'episode' {
-                // Solo mapear a objetos planos, sin DML
                 Episode__c episode = new Episode__c();
                 episode.Name = omdb.title;
                 episode.Episode_number__c = (omdb.episode != null) ? Integer.valueOf(omdb.episode) : null;
-                // Season_ID__c se asignará en ContentDomain cuando se relacione
                 return episode;
             }
             when else {
@@ -75,6 +94,7 @@ public with sharing class OMDBContent {
             }
         }
     }
+
 
     // ----------------------------
     // Parseo de fecha OMDb a Date

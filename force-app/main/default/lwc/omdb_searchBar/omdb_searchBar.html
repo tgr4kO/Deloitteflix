@@ -1,0 +1,12 @@
+<template>
+    <div class="slds-p-bottom_small">
+        <lightning-input type="search" label="Search in OMDb" value={searchText} onchange={handleChange}
+            onkeyup={handleKeyUp} placeholder="Type at least 5 characters..."></lightning-input>
+
+        <template if:true={showHelper}>
+            <p class="slds-text-color_weak slds-m-top_x-small">
+                Type at least 5 characters to start searching.
+            </p>
+        </template>
+    </div>
+</template>

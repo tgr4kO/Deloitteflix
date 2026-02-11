@@ -1,0 +1,52 @@
+<template>
+    <template if:true={hasResults}>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Poster">Poster</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Title">Title</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Year">Year</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="imdbRating">imdbRating</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Actions">Actions</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={results} for:item="item">
+                    <tr key={item.imdbID}>
+                        <td>
+                            <template if:true={item.poster}>
+                                <img src={item.poster} alt={item.title} class="poster-img" />
+                            </template>
+                        </td>
+                        <td>{item.title}</td>
+                        <td>{item.year}</td>
+                        <td>{item.imdbRating}</td>
+                        <td>
+                            <lightning-button variant="base" label="Detail" title="View detail"
+                                class="slds-m-right_x-small" data-id={item.imdbID}
+                                onclick={handleDetail}></lightning-button>
+                            <lightning-button variant="brand" label="Download to DB" title="Download to DB"
+                                data-id={item.imdbID} onclick={handleDownload}></lightning-button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+
+    <template if:false={hasResults}>
+        <p class="slds-p-vertical_small slds-text-align_center slds-text-color_weak">
+            No results. Try searching for a movie or series.
+        </p>
+    </template>
+</template>
